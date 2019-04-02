@@ -16,6 +16,11 @@
 }
 
 .fd-slider-dash {
+    margin-top: 10px;
+    margin-left: 25px;
+    margin-right: 5px;    
+    width: 275px;
+    display: none; 
 }
 
 .fd-slider-grab {
@@ -23,8 +28,7 @@
   margin-left: 25px;
   margin-right: 5px;
   border-color: #fff !important;
-  width: 275px;
-  display: none;
+  width: 275px;  
 }
 
 .fd-control-slider-img {
