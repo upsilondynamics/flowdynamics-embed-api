@@ -1,6 +1,6 @@
-﻿/*  FlowDynamics Embed Api | (c) 2018-2019 Upsilon Dynamics Inc. 
+/*  FlowDynamics Embed Api | (c) 2018-2019 Upsilon Dynamics Inc. 
     Not for redistribution or use outside of the FlowDynamics platform
-    https://www.flowdynamics.ca | http://www.upsilondynamics.com
+    https://www.flowdynamics.ca | https://www.upsilondynamics.com
 */
 
 var service_location;
@@ -11,8 +11,23 @@ var border_style;
 var scroll_style;
 var formid;
 var frameid;
-var icon_url_off = 'https://raw.githubusercontent.com/upsilondynamics/flowdynamics-docs/master/images/ico_square.jpg';
-var icon_url_on = 'https://raw.githubusercontent.com/upsilondynamics/flowdynamics-docs/master/images/ico_square.jpg';
+
+//Icon shown when pane is hidden
+var icon_url_off = 'https://github.com/upsilondynamics/flowdynamics-embed-api/blob/master/images/ico_square.jpg?raw=true';
+
+//Icon to show when pane is exposed
+var icon_url_on = 'https://github.com/upsilondynamics/flowdynamics-embed-api/blob/master/images/ico_square.jpg?raw=true';
+
+//Style location for Flow pane
+var style_url = 'https://raw.githubusercontent.com/upsilondynamics/flowdynamics-embed-api/master/style/api_v1.css';
+
+function setupStyles() {
+    $("<link/>", {
+        rel: "stylesheet",
+        type: "text/css",
+        href: style_url
+    }).appendTo("head");
+}
 
 function resetVariables() {
     var base_url = $("#baseurl");
@@ -29,7 +44,9 @@ function resetVariables() {
     border_style = "none";
     scroll_style = "hidden";
     formid = "FlowEmbedAction";
-    frameid = "FlowFrame";    
+    frameid = "FlowFrame";
+
+    setupStyles();
 }
 
 function generateid(len) {
@@ -58,15 +75,15 @@ jQuery.fn.extend({
 
         //Hide div
         $(this).hide();
-        $(this).attr('style', 'position:absolute;z-index:99999;height:100%;width:0px;right:0px;top:0px;background-color: rgba(10, 10, 10, .9);padding: 0px;border-width: 0px 0px 0px 1px;border-style: solid;border-color: #0055ff;color: #fff;');
+        $(this).addClass('fd-embed-slider');
 
         //Add a link to the body which will contain an image of the icon which will open the slider
         $('<a>').attr({
-            id: "flowdynamics-slider-grab",
+            id: 'flowdynamics-slider-grab',
+            class: 'fd-slider-grab',
             onclick: function() {
                 var openWidth = 300;
                 var closeWidth = 30;
-                var menuWidth = 275;
 
                 var isOpen = $("#" + sliderDivId).width() > closeWidth;
 
@@ -89,20 +106,19 @@ jQuery.fn.extend({
         $('<img>').attr({
             src: icon_url,
             id: 'flowdynamics-control-slider-img',
-            style: 'position:fixed;bottom:0px;right:0px;width:32px; height:32px;',
+            class: 'fd-control-slider-img',
             title: label
-        }).appendTo($("#flowdynamics-action-btn"));
+        }).appendTo($("#flowdynamics-slider-grab"));
 
 
         //Add image activator button, bottom right hand side of screen
         $('<div>').attr({
-            src: icon_url,
+            src: icon_url_off,
             id: 'flowdynamics-dash',
-            style: 'margin-top: 10px;margin-left: 25px;margin-right: 5px;border-color: #fff !important;width: 275px;display: none;'
+            class: 'fd-slider-dash'
         }).appendTo($("#" + sliderDivId));
-
-        $(this).attr("style", "height:100%");
-        $(this).Initialize(flow_id, api_key, flow_state_id, width, height, border, scroll, language, false);
+        
+        $("#flowdynamics-dash").Initialize(flow_id, api_key, flow_state_id, width, height, border, scroll, language, false);
     }
 });
 
