@@ -1,2 +1,36 @@
-body {
+.fd-embed-slider {
+  position:absolute;
+  z-index:99999;
+  height:100%;
+  width:0px;
+  right:0px;
+  top:0px;
+  
+  background-color: rgba(10, 10, 10, .9);
+  
+  padding: 0px;
+  border-width: 0px 0px 0px 1px;
+  border-style: solid;
+  border-color: #0055ff;
+  color: #fff;
+}
+
+.fd-slider-dash {
+}
+
+.fd-slider-grab {
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 5px;
+  border-color: #fff !important;
+  width: 275px;
+  display: none;
+}
+
+.fd-control-slider-img {
+  position:fixed;
+  bottom:0px;
+  right:0px;
+  width:32px; 
+  height:32px;
 }
